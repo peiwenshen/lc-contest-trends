@@ -1,21 +1,28 @@
 name: Update LeetCode Contest Ratings Diagrams
 
-# Run the workflow every month on the first day at midnight (UTC)
 on:
   schedule:
     - cron: '0 0 1 * *'
-  workflow_dispatch:
+  workflow_dispatch:  # <-- Add this to enable manual triggering
 
 jobs:
   update-diagrams:
     runs-on: ubuntu-latest
 
     steps:
-    # Checkout the repository
+    # Checkout the repository and submodules
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        submodules: true  # Initialize and update submodules
 
-    # Set up Python
+    # (Optional) Update submodules to the latest version
+    - name: Update submodules
+      run: |
+        git submodule update --init --recursive
+        git submodule foreach git pull origin main
+
+    # Set up Python 3.12
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
