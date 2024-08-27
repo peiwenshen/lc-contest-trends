@@ -69,9 +69,6 @@ def plot_contest_ratings(candlestick_df, output_filename, title):
     # Save the plot to the current directory
     plt.savefig(output_filename, bbox_inches='tight')
 
-    # Show the plot
-    plt.show()
-
 def main():
     # Load the data from the file
     file_path = 'leetcode_problem_rating/ratings.txt'
